@@ -1,0 +1,5 @@
+bin/AWS/AWS.SessionProvider.xml
+bin/AWS/AWS.TraceListener.xml
+bin/AWS/AWSSDK.xml
+src/swLibrary/bin/
+src/swLibrary/obj/
