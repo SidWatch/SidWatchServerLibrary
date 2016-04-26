@@ -61,14 +61,18 @@ namespace Sidwatch.Library.Workers
                             {
                                 foreach (var dataset in group.Datasets)
                                 {
-                                    int nfft = Convert.ToInt32(dataset.Attributes[""].Value);
+                                    string datasetName = dataset.Name;
 
-                                    //TODO get data
+                                    DateTime datasetTime;
+                                    if (DateTime.TryParse(datasetName, out datasetTime))
+                                    {
+                                        int nfft = Convert.ToInt32(dataset.Attributes["nfft"].Value);
 
+                                        Array psd = dataset.GetData();
+                                    }
                                 }
                             }
                         }
-
                     }
                     catch (Exception ex)
                     {
