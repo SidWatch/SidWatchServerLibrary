@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using Amazon.CognitoSync.Model;
-using HDF5DotNet;
-using MongoDB.Bson;
+using sharpHDF.Library.Objects;
 using TreeGecko.Library.AWS.Helpers;
 using TreeGecko.Library.Common.Delegates;
 using TreeGecko.Library.Common.Helpers;
 using TreeGecko.Library.Common.Interfaces;
-using TreeGecko.Library.HDF5.Objects;
 
 namespace Sidwatch.Library.Workers
 {
@@ -58,37 +53,21 @@ namespace Sidwatch.Library.Workers
                     try
                     {
 
-                        using (HDF5File hdf5File = new HDF5File(filename, true))
+                        using (Hdf5File hdfFile = new Hdf5File(filename))
                         {
-                            using (HDF5Group group = hdf5File.GetGroup("frequency_spectrum_data"))
+                            Hdf5Group group = hdfFile.Groups["PowerSpectrumData"];
+
+                            if (group != null)
                             {
-                                int nfft = 0;
-
-                                using (HDF5Attribute nfftAttribute = group.GetAttribute("NFFT"))
+                                foreach (var dataset in group.Datasets)
                                 {
-                                    nfft = nfftAttribute.AsInt32();
+                                    int nfft = Convert.ToInt32(dataset.Attributes[""].Value);
+
+                                    //TODO get data
+
                                 }
-
-                                List<string> datasetNames = group.GetChildDatasetNames();
-
-                                foreach (string datasetName in datasetNames)
-                                {
-                                    using (HDF5Dataset dataset = group.GetDataset(datasetName))
-                                    {
-                                        DateTime datasetTime;
-
-                                        using (HDF5Attribute timeAttribute = dataset.GetAttribute("Time"))
-                                        {
-                                            string sTime = timeAttribute.AsString();
-                                            DateTime.TryParse(sTime, out datasetTime);
-                                        }
-                                    }
-                                }
-
                             }
                         }
-
-
 
                     }
                     catch (Exception ex)

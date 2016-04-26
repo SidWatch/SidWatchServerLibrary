@@ -10,8 +10,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Sidwatch.Library</RootNamespace>
     <AssemblyName>swLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +26,7 @@
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -33,6 +37,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -43,6 +48,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -53,22 +59,36 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AWSSDK">
-      <HintPath>..\..\bin\AWS\AWSSDK.dll</HintPath>
+    <Reference Include="AWSSDK, Version=2.3.52.0, Culture=neutral, PublicKeyToken=9f476d3089b52be3, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.2.3.52.0\lib\net35\AWSSDK.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="HDF5DotNet">
-      <HintPath>..\..\..\SidWatchServerLibrary\bin\HDF5\HDF5DotNet.dll</HintPath>
+    <Reference Include="HDF.PInvoke, Version=1.8.16.20170, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HDF.PInvoke.1.8.16.11\lib\Net45\HDF.PInvoke.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="MongoDB.Bson">
-      <HintPath>..\..\bin\MongoDB\MongoDB.Bson.dll</HintPath>
+    <Reference Include="MongoDB.Bson, Version=1.10.1.73, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <HintPath>..\packages\mongocsharpdriver.1.10.1\lib\net35\MongoDB.Bson.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="MongoDB.Driver">
-      <HintPath>..\..\bin\MongoDB\MongoDB.Driver.dll</HintPath>
+    <Reference Include="MongoDB.Driver, Version=1.10.1.73, Culture=neutral, PublicKeyToken=f686731cfb9cc103, processorArchitecture=MSIL">
+      <HintPath>..\packages\mongocsharpdriver.1.10.1\lib\net35\MongoDB.Driver.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\bin\Newtonsoft\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="sharpHDF, Version=0.8.31.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\sharpHDF.0.8.31.0\lib\net45\sharpHDF.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -77,6 +97,30 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="tgAWS, Version=1.0.39.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.AWS.1.0.39.0\lib\net40\tgAWS.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="tgCommonLibrary, Version=1.0.39.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Common.1.0.39.0\lib\net40\tgCommonLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="tgGeoframeworks, Version=1.0.39.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Geospatial.1.0.39.0\lib\net40\tgGeoframeworks.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="tgLoggly, Version=1.0.39.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Loggly.1.0.39.0\lib\net45\tgLoggly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="tgMongo, Version=1.0.39.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Mongo.1.0.39.0\lib\net40\tgMongo.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="tgNet, Version=1.0.39.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Net.1.0.39.0\lib\net40\tgNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOs\DataFileDAO.cs" />
@@ -101,32 +145,24 @@
     <Folder Include="Constants\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgAWS\tgAWS.csproj">
-      <Project>{02F95722-ADB3-4DE3-8FBA-DF62D39F836B}</Project>
-      <Name>tgAWS</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgCommonLibrary\tgCommonLibrary.csproj">
-      <Project>{64FE4175-4C97-4835-AD97-3C4F19E7B4DA}</Project>
-      <Name>tgCommonLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgGeospatial\tgGeospatial.csproj">
-      <Project>{17BE4975-0A99-490E-AA0A-99F6D38F6B8D}</Project>
-      <Name>tgGeospatial</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgHDF5\tgHDF5.csproj">
-      <Project>{0AE75B32-B222-4688-BD60-EFCA4891E842}</Project>
-      <Name>tgHDF5</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgMongo\tgMongo.csproj">
-      <Project>{30C94612-2107-49FD-BEA7-9789AF896B01}</Project>
-      <Name>tgMongo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\..\TreeGecko\Libraries\src\tgNet\tgNet.csproj">
-      <Project>{E6DF32BB-18C9-4BD8-882A-A0CB67383A40}</Project>
-      <Name>tgNet</Name>
-    </ProjectReference>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>
+if not exist "$(TargetDir)bin32" md "$(TargetDir)bin32"
+xcopy /s /y "$(SolutionDir)packages\HDF.PInvoke.1.8.16.11\lib\native\bin32\*.*" "$(TargetDir)bin32"
+if not exist "$(TargetDir)bin64" md "$(TargetDir)bin64"
+xcopy /s /y "$(SolutionDir)packages\HDF.PInvoke.1.8.16.11\lib\native\bin64\*.*" "$(TargetDir)bin64"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
