@@ -4,16 +4,16 @@ using TreeGecko.Library.Mongo.DAOs;
 
 namespace Sidwatch.Library.DAOs
 {
-    internal class StationDAO : AbstractMongoDAO<Station>
+    public class SiteDayDAO : AbstractMongoDAO<SiteDay>
     {
-        public StationDAO(MongoDatabase _mongoDB)
+        public SiteDayDAO(MongoDatabase _mongoDB)
             : base(_mongoDB)
         {
         }
 
         public override string TableName
         {
-            get { return "Stations"; }
+            get { return "SiteDay"; }
         }
     }
 }

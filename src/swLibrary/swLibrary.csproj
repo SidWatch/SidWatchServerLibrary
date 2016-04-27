@@ -125,12 +125,14 @@
   <ItemGroup>
     <Compile Include="DAOs\DataFileDAO.cs" />
     <Compile Include="DAOs\SiteDAO.cs" />
+    <Compile Include="DAOs\SiteDayDAO.cs" />
     <Compile Include="DAOs\SiteSpectrumDAO.cs" />
     <Compile Include="DAOs\StationDAO.cs" />
     <Compile Include="DAOs\StationReadingDAO.cs" />
     <Compile Include="DAOs\SystemCredentialsDAO.cs" />
     <Compile Include="DAOs\UserDAO.cs" />
     <Compile Include="Managers\SidwatchManager.cs" />
+    <Compile Include="Objects\SiteDay.cs" />
     <Compile Include="Objects\SystemCredentials.cs" />
     <Compile Include="Objects\DataFile.cs" />
     <Compile Include="Objects\Site.cs" />
