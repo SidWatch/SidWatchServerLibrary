@@ -131,8 +131,11 @@
     <Compile Include="DAOs\StationReadingDAO.cs" />
     <Compile Include="DAOs\SystemCredentialsDAO.cs" />
     <Compile Include="DAOs\UserDAO.cs" />
+    <Compile Include="Helpers\SpectrumHelper.cs" />
     <Compile Include="Managers\SidwatchManager.cs" />
     <Compile Include="Objects\SiteDay.cs" />
+    <Compile Include="JsonObjects\Spectrum.cs" />
+    <Compile Include="JsonObjects\FrequencyVector.cs" />
     <Compile Include="Objects\SystemCredentials.cs" />
     <Compile Include="Objects\DataFile.cs" />
     <Compile Include="Objects\Site.cs" />
@@ -145,7 +148,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Constants\" />
-    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
