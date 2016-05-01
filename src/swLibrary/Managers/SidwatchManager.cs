@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Sidwatch.Library.DAOs;
 using Sidwatch.Library.Objects;
 using TreeGecko.Library.Mongo.Managers;
@@ -84,6 +85,69 @@ namespace Sidwatch.Library.Managers
         {
             SiteDAO dao = new SiteDAO(MongoDB);
             dao.Persist(_site);
+        }
+
+        #endregion
+
+        #region SiteDay
+
+        public SiteDay GetSiteDay(Guid _siteGuid, DateTime _date)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            return dao.Get(_siteGuid, _date);
+        }
+
+        public List<SiteDay> GetSiteDays(Guid _siteGuid)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            return dao.GetSiteDays(_siteGuid);
+        }
+
+        public void Persist(SiteDay _siteDay)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            dao.Persist(_siteDay);
+        }
+
+        public void AddFileToSiteDay(Guid _siteGuid, DateTime _date)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            SiteDay sd = dao.Get(_siteGuid, _date);
+
+            if (sd == null)
+            {
+                sd = new SiteDay
+                {
+                    Active = true,
+                    DataFileCount = 0,
+                    Date = _date,
+                    Guid = Guid.NewGuid(),
+                    ParentGuid = _siteGuid
+                };
+            }
+
+            sd.DataFileCount++;
+            dao.Persist(sd);
+        }
+
+        public void SetSiteDayFiles(Guid _siteGuid, DateTime _date, int _count)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            SiteDay sd = dao.Get(_siteGuid, _date);
+
+            if (sd == null)
+            {
+                sd = new SiteDay
+                {
+                    Active = true,
+                    Date = _date,
+                    Guid = Guid.NewGuid(),
+                    ParentGuid = _siteGuid
+                };
+            }
+
+            sd.DataFileCount = _count;
+            dao.Persist(sd);
         }
 
         #endregion

@@ -6,3 +6,6 @@ src/swLibrary/obj/
 src/packages/
 *.suo
 *.config
+src/swTestLibrary/obj/
+src/swTestLibrary/bin/
+*.user
