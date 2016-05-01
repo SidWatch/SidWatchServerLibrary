@@ -4,7 +4,6 @@ install:
   - ps: .\install-mongo-on-appveyor.ps1
   - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
   
-C:\projects\sidwatchserverlibrary\src\
 before_build:
   - nuget restore src/swLibrary.sln
 
