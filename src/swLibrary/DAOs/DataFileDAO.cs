@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using System;
+using System.Collections.Generic;
+using MongoDB.Driver;
 using Sidwatch.Library.Objects;
 using TreeGecko.Library.Mongo.DAOs;
 
@@ -26,6 +28,11 @@ namespace Sidwatch.Library.DAOs
             BuildNonuniqueIndex(columns, "PARENT_DATETIME");
 
             BuildNonuniqueIndex("DateTime", "DATETIME");
+        }
+
+        public List<DataFile> GetDataFilesBySite(Guid _siteGuid)
+        {
+            return GetSorted("ParentGuid", _siteGuid.ToString(), "DateTime");
         }
     }
 }

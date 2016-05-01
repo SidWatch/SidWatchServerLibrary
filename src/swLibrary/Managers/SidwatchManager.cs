@@ -71,6 +71,12 @@ namespace Sidwatch.Library.Managers
             dao.Persist(_dataFile);
         }
 
+        public List<DataFile> GetDataFiles(Guid _siteGuid)
+        {
+            DataFileDAO dao = new DataFileDAO(MongoDB);
+            return dao.GetDataFilesBySite(_siteGuid);
+        }
+
         #endregion
 
         #region Site
@@ -85,6 +91,18 @@ namespace Sidwatch.Library.Managers
         {
             SiteDAO dao = new SiteDAO(MongoDB);
             dao.Persist(_site);
+        }
+
+        public List<Site> GetSites()
+        {
+            SiteDAO dao = new SiteDAO(MongoDB);
+            return dao.GetAll();
+        }
+
+        public List<Site> GetActiveSites()
+        {
+            SiteDAO dao = new SiteDAO(MongoDB);
+            return dao.GetActive();
         }
 
         #endregion
@@ -170,7 +188,7 @@ namespace Sidwatch.Library.Managers
 
         #region Station
 
-        public Station Get(Guid _stationGuid)
+        public Station GetStation(Guid _stationGuid)
         {
             StationDAO dao = new StationDAO(MongoDB);
             return dao.Get(_stationGuid);

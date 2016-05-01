@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Sidwatch.Library.Managers;
 using Sidwatch.Library.Objects;
+using TreeGecko.Library.Common.Security;
 using TreeGecko.Library.Geospatial.Objects;
 
 namespace swTestLibrary.Tests
@@ -9,6 +11,13 @@ namespace swTestLibrary.Tests
     [TestFixture]
     public class SiteTests
     {
+        SidwatchManager m_Manager = new SidwatchManager();
+
+        [OneTimeSetUp]
+        public void Setup()
+        {
+        }
+
         [Test]
         public void SerializeSite()
         {
@@ -71,8 +80,7 @@ namespace swTestLibrary.Tests
                 VersionGuid = Guid.NewGuid()
             };
 
-            SidwatchManager manager = new SidwatchManager();
-            manager.Persist(site);
+            m_Manager.Persist(site);
         }
 
         [Test]
@@ -95,10 +103,9 @@ namespace swTestLibrary.Tests
                 VersionGuid = Guid.NewGuid()
             };
 
-            SidwatchManager manager = new SidwatchManager();
-            manager.Persist(site);
+            m_Manager.Persist(site);
 
-            Site site2 = manager.GetSite(site.Guid);
+            Site site2 = m_Manager.GetSite(site.Guid);
             Assert.IsNotNull(site2);
 
             Assert.AreEqual(site.Active, site2.Active);
@@ -136,16 +143,15 @@ namespace swTestLibrary.Tests
                 VersionGuid = Guid.NewGuid()
             };
 
-            SidwatchManager manager = new SidwatchManager();
-            manager.Persist(site);
+            m_Manager.Persist(site);
 
-            Site site2 = manager.GetSite(site.Guid);
+            Site site2 = m_Manager.GetSite(site.Guid);
             Assert.IsNotNull(site2);
 
             site2.Name = "TestSite2";
-            manager.Persist(site2);
+            m_Manager.Persist(site2);
 
-            Site site3 = manager.GetSite(site.Guid);
+            Site site3 = m_Manager.GetSite(site.Guid);
             Assert.IsNotNull(site3);
             
             Assert.AreEqual(site2.Active, site3.Active);
@@ -161,6 +167,126 @@ namespace swTestLibrary.Tests
             Assert.AreEqual(site2.SiteOwnerGuid, site3.SiteOwnerGuid);
             Assert.AreEqual(site2.Timezone, site3.Timezone);
             Assert.AreEqual(site2.UTCOffset, site3.UTCOffset);
+        }
+
+        [Test]
+        public void GetAllSites()
+        {
+            Site site1 = new Site
+            {
+                Active = true,
+                Guid = Guid.NewGuid(),
+                LastModifiedBy = Guid.NewGuid(),
+                LastModifiedDateTime = DateTime.Now,
+                Location = new GeoPoint(-101, 45),
+                MonitorID = 1000,
+                Name = RandomString.GetRandomString(10),
+                ParentGuid = Guid.NewGuid(),
+                PersistedDateTime = DateTime.Now,
+                SiteOwnerGuid = Guid.NewGuid(),
+                Timezone = "MST",
+                UTCOffset = 6,
+                VersionGuid = Guid.NewGuid()
+            };
+            m_Manager.Persist(site1);
+
+            Site site2 = new Site
+            {
+                Active = false,
+                Guid = Guid.NewGuid(),
+                LastModifiedBy = Guid.NewGuid(),
+                LastModifiedDateTime = DateTime.Now,
+                Location = new GeoPoint(-101, 45),
+                MonitorID = 1000,
+                Name = RandomString.GetRandomString(10),
+                ParentGuid = Guid.NewGuid(),
+                PersistedDateTime = DateTime.Now,
+                SiteOwnerGuid = Guid.NewGuid(),
+                Timezone = "MST",
+                UTCOffset = 6,
+                VersionGuid = Guid.NewGuid()
+            };
+            m_Manager.Persist(site2);
+
+            List<Site> sites = m_Manager.GetSites();
+            bool found1 = false;
+            bool found2 = false;
+
+            foreach (var site in sites)
+            {
+                if (site.Guid == site1.Guid)
+                {
+                    found1 = true;
+                }
+
+                if (site.Guid == site2.Guid)
+                {
+                    found2 = true;
+                }
+            }
+
+            Assert.IsTrue(found1);
+            Assert.IsTrue(found2);
+        }
+
+        [Test]
+        public void GetActiveSites()
+        {
+            Site site1 = new Site
+            {
+                Active = true,
+                Guid = Guid.NewGuid(),
+                LastModifiedBy = Guid.NewGuid(),
+                LastModifiedDateTime = DateTime.Now,
+                Location = new GeoPoint(-101, 45),
+                MonitorID = 1000,
+                Name = RandomString.GetRandomString(10),
+                ParentGuid = Guid.NewGuid(),
+                PersistedDateTime = DateTime.Now,
+                SiteOwnerGuid = Guid.NewGuid(),
+                Timezone = "MST",
+                UTCOffset = 6,
+                VersionGuid = Guid.NewGuid()
+            };
+            m_Manager.Persist(site1);
+
+            Site site2 = new Site
+            {
+                Active = false,
+                Guid = Guid.NewGuid(),
+                LastModifiedBy = Guid.NewGuid(),
+                LastModifiedDateTime = DateTime.Now,
+                Location = new GeoPoint(-101, 45),
+                MonitorID = 1000,
+                Name = RandomString.GetRandomString(10),
+                ParentGuid = Guid.NewGuid(),
+                PersistedDateTime = DateTime.Now,
+                SiteOwnerGuid = Guid.NewGuid(),
+                Timezone = "MST",
+                UTCOffset = 6,
+                VersionGuid = Guid.NewGuid()
+            };
+            m_Manager.Persist(site2);
+
+            List<Site> sites = m_Manager.GetActiveSites();
+            bool found1 = false;
+            bool found2 = false;
+
+            foreach (var site in sites)
+            {
+                if (site.Guid == site1.Guid)
+                {
+                    found1 = true;
+                }
+
+                if (site.Guid == site2.Guid)
+                {
+                    found2 = true;
+                }
+            }
+
+            Assert.IsTrue(found1);
+            Assert.IsTrue(!found2);
         }
     }
 }
