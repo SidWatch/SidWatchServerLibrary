@@ -2,7 +2,9 @@ version: 1.0.{build}
 
 install:
   - ps: .\install-mongo-on-appveyor.ps1
-
+  - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+  
+C:\projects\sidwatchserverlibrary\src\
 before_build:
   - nuget restore src/swLibrary.sln
 
@@ -29,3 +31,8 @@ build:
   project: src/swLibrary.sln
   verbosity: Minimal 
   publish_nuget: true
+  
+after_test: 
+  - c:\projects\sidwatchserverlibrary\cover.bat
+  - pip install codecov
+  - codecov -f "c:\projects\sidwatchserverlibrary\sidwatchserverlibrary-coverage.xml" -X gcov
