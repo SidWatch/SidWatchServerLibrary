@@ -22,13 +22,9 @@ Start-Sleep -Seconds 5
 # Start mongodb service
 net start mongodb
 
-cmd /c $env:temp\mongo\mongo.exe
+cmd /c $env:temp\mongo\mongo.exe localhost:27017/admin --eval "db.createUser( { user: "sw_test_user",  pwd: "testing", roles: [ { role: "readWrite", db: "sidwatch_test" } ] } ) "
 
-use admin
-
-db.createUser( { user: "sw_test_user",  pwd: "testing", roles: [ { role: "readWrite", db: "sidwatch_test" } ] } )
-
-exit
+cmd /c $env:temp\mongo\mongo.exe localhost:27017/admin --eval "printjson(db.getUsers())"
 
 # Return to last location, to run the build
 Pop-Location
