@@ -1,7 +1,7 @@
 version: 1.0.{build}
 
 install:
-    ps: .\install-mongo-on-appveyor.ps1
+  - ps: .\install-mongo-on-appveyor.ps1
 
 before_build:
   - nuget restore src/swLibrary.sln
