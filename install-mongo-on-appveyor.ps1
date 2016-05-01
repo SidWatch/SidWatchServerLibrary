@@ -22,7 +22,7 @@ Start-Sleep -Seconds 5
 # Start mongodb service
 net start mongodb
 
-mongo
+cmd /c $env:temp\mongo\mongo.exe
 
 use admin
 
