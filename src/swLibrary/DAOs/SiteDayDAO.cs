@@ -14,6 +14,8 @@ namespace Sidwatch.Library.DAOs
         public SiteDayDAO(MongoDatabase _mongoDB)
             : base(_mongoDB)
         {
+            //Site
+            HasParent = true;
         }
 
         public override string TableName

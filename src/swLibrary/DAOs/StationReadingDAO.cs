@@ -13,6 +13,8 @@ namespace Sidwatch.Library.DAOs
         public StationReadingDAO(MongoDatabase _mongoDB)
             : base(_mongoDB)
         {
+            //Station
+            HasParent = true;
         }
 
         public override string TableName

@@ -8,6 +8,7 @@ namespace Sidwatch.Library.DAOs
     {
         public UserDAO(MongoDatabase _mongoDB) : base(_mongoDB)
         {
+            HasParent = false;
         }
 
         public User GetUser(string _username)
