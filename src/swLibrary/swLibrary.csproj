@@ -132,7 +132,8 @@
     <Compile Include="DAOs\SystemCredentialsDAO.cs" />
     <Compile Include="DAOs\UserDAO.cs" />
     <Compile Include="Helpers\SpectrumHelper.cs" />
-    <Compile Include="Managers\SidwatchManager.cs" />
+    <Compile Include="Managers\SidWatchManager.cs" />
+    <Compile Include="Managers\SidWatchStructureManager.cs" />
     <Compile Include="Objects\SiteDay.cs" />
     <Compile Include="JsonObjects\Spectrum.cs" />
     <Compile Include="JsonObjects\FrequencyVector.cs" />

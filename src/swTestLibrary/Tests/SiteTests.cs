@@ -11,7 +11,7 @@ namespace swTestLibrary.Tests
     [TestFixture]
     public class SiteTests
     {
-        SidwatchManager m_Manager = new SidwatchManager();
+        SidWatchManager m_Manager = new SidWatchManager();
 
         [OneTimeSetUp]
         public void Setup()

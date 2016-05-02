@@ -9,9 +9,9 @@ using TreeGecko.Library.Net.Objects;
 
 namespace Sidwatch.Library.Managers
 {
-    public class SidwatchManager : AbstractMongoManager
+    public class SidWatchManager : AbstractMongoManager
     {
-        public SidwatchManager() : base("SW")
+        public SidWatchManager() : base("SW")
         {
         }
 
@@ -115,6 +115,12 @@ namespace Sidwatch.Library.Managers
             return dao.Get(_siteGuid, _date);
         }
 
+        public SiteDay GetSiteDay(Guid _siteDayGuid)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            return dao.Get(_siteDayGuid);
+        }
+
         public List<SiteDay> GetSiteDays(Guid _siteGuid)
         {
             SiteDayDAO dao = new SiteDayDAO(MongoDB);
@@ -151,14 +157,14 @@ namespace Sidwatch.Library.Managers
         public void SetSiteDayFiles(Guid _siteGuid, DateTime _date, int _count)
         {
             SiteDayDAO dao = new SiteDayDAO(MongoDB);
-            SiteDay sd = dao.Get(_siteGuid, _date);
+            SiteDay sd = dao.Get(_siteGuid, _date.Date);
 
             if (sd == null)
             {
                 sd = new SiteDay
                 {
                     Active = true,
-                    Date = _date,
+                    Date = _date.Date,
                     Guid = Guid.NewGuid(),
                     ParentGuid = _siteGuid
                 };

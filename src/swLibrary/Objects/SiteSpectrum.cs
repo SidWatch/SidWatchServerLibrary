@@ -11,6 +11,7 @@ namespace Sidwatch.Library.Objects
         public Double NFFT { get; set; }
         public int SamplingFormat { get; set; }
         public Guid DataFileGuid { get; set; }
+        public string FileUrl { get; set; }
 
         public override TGSerializedObject GetTGSerializedObject()
         {
@@ -21,6 +22,7 @@ namespace Sidwatch.Library.Objects
             tgs.Add("NFFT", NFFT);
             tgs.Add("SamplingFormat", SamplingFormat);
             tgs.Add("DataFileGuid", DataFileGuid);
+            tgs.Add("FileUrl", FileUrl);
 
             return tgs;
         }
@@ -34,6 +36,7 @@ namespace Sidwatch.Library.Objects
             NFFT = _tgs.GetDouble("NFFT");
             SamplingFormat = _tgs.GetInt32("SamplingFormat");
             DataFileGuid = _tgs.GetGuid("DataFileGuid");
+            FileUrl = _tgs.GetString("FileUrl");
         }
     }
 }

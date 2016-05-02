@@ -12,7 +12,7 @@ namespace swTestLibrary.Tests
     [TestFixture]
     public class DataFileTests
     {
-        private SidwatchManager m_Manager = new SidwatchManager();
+        private SidWatchManager m_Manager = new SidWatchManager();
         private Guid m_SiteGuid;
 
         [OneTimeSetUp]
