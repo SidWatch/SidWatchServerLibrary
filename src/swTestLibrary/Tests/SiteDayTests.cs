@@ -152,6 +152,20 @@ namespace swTestLibrary.Tests
         }
 
         [Test]
+        public void AddToSiteDay2()
+        {
+            DateTime now = DateTime.Now.AddYears(-10).Date;
+
+            m_Manager.AddFileToSiteDay(m_SiteGuid, now);
+            m_Manager.AddFileToSiteDay(m_SiteGuid, now);
+
+            var siteDay = m_Manager.GetSiteDay(m_SiteGuid, now);
+            Assert.IsNotNull(siteDay);
+
+            Assert.AreEqual(siteDay.DataFileCount, 2);
+        }
+
+        [Test]
         public void GetSiteDays()
         {
             DateTime now = DateTime.Now.AddYears(-1).Date;
