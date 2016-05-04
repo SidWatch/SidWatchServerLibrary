@@ -154,7 +154,7 @@ namespace swTestLibrary.Tests
         [Test]
         public void AddToSiteDay2()
         {
-            DateTime now = DateTime.Now.AddYears(-10).Date;
+            DateTime now = DateTime.Now.AddYears(-10).AddDays(-10).Date;
 
             m_Manager.AddFileToSiteDay(m_SiteGuid, now);
             m_Manager.AddFileToSiteDay(m_SiteGuid, now);

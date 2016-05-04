@@ -121,6 +121,5 @@ namespace swTestLibrary.Tests
             Assert.AreEqual(spectrum2.SamplesPerSecond, spectrum3.SamplesPerSecond);
             Assert.AreEqual(spectrum2.SamplingFormat, spectrum3.SamplingFormat);
         }
-
     }
 }
