@@ -7,8 +7,7 @@ namespace Sidwatch.Library.Objects
     public class User : TGUser
     {
         public UserTypes UserType { get; set; }
-
-
+        
         public override TGSerializedObject GetTGSerializedObject()
         {
             TGSerializedObject tgs = base.GetTGSerializedObject();

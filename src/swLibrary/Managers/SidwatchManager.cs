@@ -34,6 +34,20 @@ namespace Sidwatch.Library.Managers
             dao.Persist(_user);
         }
 
+        public List<User> GetUsers()
+        {
+            UserDAO dao = new UserDAO(MongoDB);
+
+            return dao.GetAll();
+        }
+
+        public List<User> GetActiveUsers()
+        {
+            UserDAO dao = new UserDAO(MongoDB);
+
+            return dao.GetActive();
+        }
+
         public bool ValidateUser(User _user, string _password)
         {
             throw new NotImplementedException();
