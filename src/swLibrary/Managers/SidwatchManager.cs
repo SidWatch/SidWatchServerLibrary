@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using Sidwatch.Library.DAOs;
 using Sidwatch.Library.Objects;
-using TreeGecko.Library.Mongo.Managers;
-using TreeGecko.Library.Net.DAOs;
-using TreeGecko.Library.Net.Enums;
+using TreeGecko.Library.Net.Managers;
 using TreeGecko.Library.Net.Objects;
 
 namespace Sidwatch.Library.Managers
 {
-    public class SidWatchManager : AbstractMongoManager
+    public class SidWatchManager : AbstractCoreManager
     {
         public SidWatchManager() : base("SW")
         {
         }
 
         #region User
+
         public User GetUser(string _username)
         {
             UserDAO dao = new UserDAO(MongoDB);
@@ -48,25 +47,23 @@ namespace Sidwatch.Library.Managers
             return dao.GetActive();
         }
 
-        public bool ValidateUser(User _user, string _password)
+        public bool ValidateUser(string _username, string _authToken, out User _user)
         {
-            throw new NotImplementedException();
-        }
+            _user = GetUser(_username);
 
-        #endregion
+            if (_user != null)
+            {
+                TGUserAuthorization userAuthorization = GetUserAuthorization(_user.Guid, _authToken);
 
-        #region UserAuthorization
+                if (userAuthorization != null)
+                {
+                    return true;
+                }
+                
+                _user = null;
+            }
 
-        public TGUserAuthorization GetUserAuthorization(Guid _userGuid, string _authToken)
-        {
-            TGUserAuthorizationDAO dao = new TGUserAuthorizationDAO(MongoDB);
-            return dao.Get(_userGuid, _authToken);
-        }
-
-        public void Persist(TGUserAuthorization _authorization)
-        {
-            TGUserAuthorizationDAO dao = new TGUserAuthorizationDAO(MongoDB);
-            dao.Persist(_authorization);
+            return false;
         }
 
         #endregion
@@ -220,6 +217,18 @@ namespace Sidwatch.Library.Managers
             dao.Persist(_station);
         }
 
+        public List<Station> GetStations()
+        {
+            StationDAO dao = new StationDAO(MongoDB);
+            return dao.GetAll();
+        }
+
+        public List<Station> GetActiveStations()
+        {
+            StationDAO dao = new StationDAO(MongoDB);
+            return dao.GetActive();
+        }
+
         #endregion
 
         #region StationReading
@@ -254,67 +263,5 @@ namespace Sidwatch.Library.Managers
 
         #endregion
 
-        #region Logging
-        public void LogException(Guid _userGuid, string _exception)
-        {
-            WebLogEntry logEntry = new WebLogEntry
-            {
-                Active = true,
-                UserGuid = _userGuid,
-                Message = _exception,
-                MessageDateTime = DateTime.UtcNow,
-                WebLogType = LogMessageType.Exception
-            };
-
-            WebLogEntryDAO dao = new WebLogEntryDAO(MongoDB);
-            dao.Persist(logEntry);
-        }
-
-        public void LogWarning(Guid _userGuid, string _warning)
-        {
-            WebLogEntry logEntry = new WebLogEntry
-            {
-                Active = true,
-                UserGuid = _userGuid,
-                Message = _warning,
-                MessageDateTime = DateTime.UtcNow,
-                WebLogType = LogMessageType.Warning
-            };
-
-            WebLogEntryDAO dao = new WebLogEntryDAO(MongoDB);
-            dao.Persist(logEntry);
-        }
-
-        public void LogVerbose(Guid _userGuid, string _verbose)
-        {
-            WebLogEntry logEntry = new WebLogEntry
-            {
-                Active = true,
-                UserGuid = _userGuid,
-                Message = _verbose,
-                MessageDateTime = DateTime.UtcNow,
-                WebLogType = LogMessageType.Warning
-            };
-
-            WebLogEntryDAO dao = new WebLogEntryDAO(MongoDB);
-            dao.Persist(logEntry);
-        }
-
-        public void LogInfo(Guid _userGuid, string _info)
-        {
-            WebLogEntry logEntry = new WebLogEntry
-            {
-                Active = true,
-                UserGuid = _userGuid,
-                Message = _info,
-                MessageDateTime = DateTime.UtcNow,
-                WebLogType = LogMessageType.Info
-            };
-
-            WebLogEntryDAO dao = new WebLogEntryDAO(MongoDB);
-            dao.Persist(logEntry);
-        }
-
-        #endregion
     }
 }

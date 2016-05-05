@@ -6,6 +6,7 @@ using Sidwatch.Library.Objects;
 using TreeGecko.Library.Common.Enums;
 using TreeGecko.Library.Common.Objects;
 using TreeGecko.Library.Common.Security;
+using TreeGecko.Library.Net.Objects;
 
 namespace swTestLibrary.Tests
 {
@@ -214,5 +215,38 @@ namespace swTestLibrary.Tests
             Assert.IsTrue(has1);
             Assert.IsTrue(!has2);
         }
+
+        [Test]
+        public void VerifyUserPassword()
+        {
+            User user1 = new User
+            {
+                Active = true,
+                DisplayName = RandomString.GetRandomString(10),
+                EmailAddress = RandomString.GetRandomString(10) + "@" + RandomString.GetRandomString(10) + ".com",
+                EulaAccepted = true,
+                FamilyName = RandomString.GetRandomString(10),
+                GivenName = RandomString.GetRandomString(8),
+                Guid = Guid.NewGuid(),
+                IsVerified = true,
+                ParentGuid = null,
+                UserType = UserTypes.User,
+                Username = RandomString.GetRandomString(10)
+            };
+            m_Manager.Persist(user1);
+
+            string password = RandomString.GetRandomString(10);
+            TGUserPassword up = TGUserPassword.GetNew(user1.Guid, user1.Username, password);
+            m_Manager.Persist(up);
+
+            bool result = m_Manager.ValidateUser(user1, RandomString.GetRandomString(10));
+            Assert.IsTrue(!result);
+
+            result = m_Manager.ValidateUser(user1, password);
+            Assert.IsTrue(result);
+        }
+
+
+
     }
 }

@@ -110,11 +110,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\DataFileTests.cs" />
-    <Compile Include="Tests\Logtests.cs" />
     <Compile Include="Tests\SetupTests.cs" />
     <Compile Include="Tests\SiteDayTests.cs" />
     <Compile Include="Tests\SiteSpectrumTests.cs" />
     <Compile Include="Tests\SiteTests.cs" />
+    <Compile Include="Tests\StationTests.cs" />
+    <Compile Include="Tests\UserAuthenticationTests.cs" />
     <Compile Include="Tests\UserTests.cs" />
   </ItemGroup>
   <ItemGroup>
