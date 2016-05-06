@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using Sidwatch.Library.Managers;
 using Sidwatch.Library.Objects;
@@ -15,7 +11,7 @@ namespace swTestLibrary.Tests
     [TestFixture]
     public class SiteSpectrumTests
     {
-        private SidWatchManager m_Manager = new SidWatchManager();
+        private readonly SidWatchManager m_Manager = new SidWatchManager();
         private Guid m_SiteGuid;
 
         [OneTimeSetUp]

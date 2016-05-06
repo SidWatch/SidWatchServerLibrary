@@ -12,7 +12,7 @@ namespace swTestLibrary.Tests
     [TestFixture]
     public class SiteDayTests
     {
-        private SidWatchManager m_Manager = new SidWatchManager();
+        private readonly SidWatchManager m_Manager = new SidWatchManager();
         private Guid m_SiteGuid;
 
         [OneTimeSetUp]

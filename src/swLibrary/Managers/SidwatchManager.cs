@@ -245,6 +245,13 @@ namespace Sidwatch.Library.Managers
             dao.Persist(_stationReading);
         }
 
+        public List<StationReading> GetStationReadings(Guid _stationGuid, Guid _siteGuid, DateTime _startDateTime, DateTime _endDateTime)
+        {
+            StationReadingDAO dao = new StationReadingDAO(MongoDB);
+
+            return dao.GetReadings(_stationGuid, _siteGuid, _startDateTime, _endDateTime);
+        }
+
         #endregion
 
         #region SystemCredentials

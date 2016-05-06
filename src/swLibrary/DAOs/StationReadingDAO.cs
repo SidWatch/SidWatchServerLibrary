@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Sidwatch.Library.Objects;
 using TreeGecko.Library.Mongo.DAOs;
 
@@ -13,7 +15,7 @@ namespace Sidwatch.Library.DAOs
         public StationReadingDAO(MongoDatabase _mongoDB)
             : base(_mongoDB)
         {
-            //Station
+            //Site
             HasParent = true;
         }
 
@@ -35,6 +37,23 @@ namespace Sidwatch.Library.DAOs
             columns = new[] { "ParentGuid", "ReadingDateTime" };
             BuildNonuniqueIndex(columns, "SITE_DATETIME");
 
+            columns = new[] { "ParentGuid", "StationGuid", "ReadingDateTime" };
+            BuildNonuniqueIndex(columns, "SITE_STATION_DATETIME");
+        }
+
+        public List<StationReading> GetReadings(
+            Guid _stationGuid,
+            Guid _siteGuid,
+            DateTime _startDateTime,
+            DateTime _endDateTime)
+        {
+            IMongoQuery query = Query.And(
+                Query.EQ("ParentGuid", new BsonString(_siteGuid.ToString())),
+                Query.EQ("StationGuid", new BsonString(_stationGuid.ToString())),
+                Query.GTE("ReadingDateTime", new BsonString(_startDateTime.ToString("u"))),
+                Query.LTE("ReadingDateTime", new BsonString(_startDateTime.ToString("u"))));
+
+            return GetList(query);
         }
     }
 }

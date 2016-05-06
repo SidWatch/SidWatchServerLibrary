@@ -12,7 +12,7 @@ namespace swTestLibrary.Tests
     [TestFixture]
     public class StationTests
     {
-        public readonly SidWatchManager m_Manager = new SidWatchManager();
+        private readonly SidWatchManager m_Manager = new SidWatchManager();
 
         [Test]
         public void SerializationTest()

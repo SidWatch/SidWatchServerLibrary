@@ -13,7 +13,7 @@ namespace swTestLibrary.Tests
     [TestFixture]
     public class UserTests
     {
-        private SidWatchManager m_Manager = new SidWatchManager();
+        private readonly SidWatchManager m_Manager = new SidWatchManager();
 
         [OneTimeSetUp]
         public void Setup()

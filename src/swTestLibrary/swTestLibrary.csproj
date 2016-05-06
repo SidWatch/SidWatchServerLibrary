@@ -114,6 +114,7 @@
     <Compile Include="Tests\SiteDayTests.cs" />
     <Compile Include="Tests\SiteSpectrumTests.cs" />
     <Compile Include="Tests\SiteTests.cs" />
+    <Compile Include="Tests\StationReadingTests.cs" />
     <Compile Include="Tests\StationTests.cs" />
     <Compile Include="Tests\UserAuthenticationTests.cs" />
     <Compile Include="Tests\UserTests.cs" />

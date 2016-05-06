@@ -110,7 +110,20 @@ namespace swTestLibrary.Tests
             result = m_Manager.ValidateUser(user1.Username, RandomString.GetRandomString(50), out user3);
             Assert.IsTrue(!result);
             Assert.IsNull(user3);
+        }
+        
+        [Test]
+        public void ValidateUserFailures()
+        {
+            User user;
+            
+            bool result = m_Manager.ValidateUser(
+                RandomString.GetRandomString(10), 
+                RandomString.GetRandomString(10),
+                out user);
 
+            Assert.IsNull(user);
+            Assert.IsFalse(result);
         }
     }
 }
