@@ -194,7 +194,7 @@ namespace swTestLibrary.Tests
                 m_Station.Guid, 
                 m_Site.Guid,
                 DateTime.Now.AddYears(-1), 
-                DateTime.Now);
+                DateTime.Now.AddDays(1));
 
             Assert.Greater(readings.Count, 0);
 

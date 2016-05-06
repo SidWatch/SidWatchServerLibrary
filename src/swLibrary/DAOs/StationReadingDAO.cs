@@ -51,7 +51,7 @@ namespace Sidwatch.Library.DAOs
                 Query.EQ("ParentGuid", new BsonString(_siteGuid.ToString())),
                 Query.EQ("StationGuid", new BsonString(_stationGuid.ToString())),
                 Query.GTE("ReadingDateTime", new BsonString(_startDateTime.ToString("u"))),
-                Query.LTE("ReadingDateTime", new BsonString(_startDateTime.ToString("u"))));
+                Query.LTE("ReadingDateTime", new BsonString(_endDateTime.ToString("u"))));
 
             return GetList(query);
         }
