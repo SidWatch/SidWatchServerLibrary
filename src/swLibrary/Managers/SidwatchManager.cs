@@ -18,13 +18,19 @@ namespace Sidwatch.Library.Managers
         public User GetUser(string _username)
         {
             UserDAO dao = new UserDAO(MongoDB);
-            return dao.GetUser(_username);
+            return dao.Get(_username);
+        }
+
+        public User GetUserByEmail(string _email)
+        {
+            UserDAO dao = new UserDAO(MongoDB);
+            return dao.GetByEmail(_email);
         }
 
         public User GetUser(Guid _userGuid)
         {
             UserDAO dao = new UserDAO(MongoDB);
-            return (User) dao.Get(_userGuid);
+            return dao.Get(_userGuid);
         }
 
         public void Persist(User _user)

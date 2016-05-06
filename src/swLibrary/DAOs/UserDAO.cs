@@ -33,10 +33,5 @@ namespace Sidwatch.Library.DAOs
         {
             return GetOneItem<User>("EmailAddress", _emailAddress);
         }
-        
-        public User GetUser(string _username)
-        {
-            return GetOneItem<User>("Username", _username);
-        }
     }
 }

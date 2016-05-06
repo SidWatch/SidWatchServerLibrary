@@ -103,6 +103,9 @@ namespace swTestLibrary.Tests
 
             User user3 = m_Manager.GetUser(user.Username);
             Assert.IsNotNull(user3);
+
+            User user4 = m_Manager.GetUserByEmail(user.EmailAddress);
+            Assert.IsNotNull(user4);
         }
 
         [Test]
