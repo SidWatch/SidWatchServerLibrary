@@ -223,5 +223,20 @@ namespace swTestLibrary.Tests
             Assert.IsNotNull(latest);
             Assert.AreEqual(latest.Guid, sc1.Guid);
         }
+
+        [Test]
+        public void GetLatestActiveNull()
+        {
+            List<SystemCredentials> active = m_Manager.GetActiveSystemCredentials();
+
+            foreach (var systemCredential in active)
+            {
+                systemCredential.Active = false;
+                m_Manager.Persist(systemCredential);
+            }
+
+            SystemCredentials sc = m_Manager.GetLatestActive();
+            Assert.IsNull(sc);
+        }
     }
 }

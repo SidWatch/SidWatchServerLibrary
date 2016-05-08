@@ -21,7 +21,7 @@ namespace Sidwatch.Library.DAOs
             MongoCursor cursor = GetCursor(query).SetSortOrder(SortBy.Descending("CreatedDateTime"));
             
             List<SystemCredentials> list = GetList(cursor);
-            if (list.Count > 1)
+            if (list.Count >= 1)
             {
                 return list[0];
             }
