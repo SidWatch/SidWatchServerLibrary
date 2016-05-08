@@ -262,7 +262,7 @@ namespace Sidwatch.Library.Managers
 
         #region SystemCredentials
 
-        public SystemCredentials GetSystemCredentials(Guid _systemCredentialsGuid)
+        public SystemCredentials GetSystemCredential(Guid _systemCredentialsGuid)
         {
             SystemCredentialsDAO dao = new SystemCredentialsDAO(MongoDB);
             return dao.Get(_systemCredentialsGuid);
@@ -272,6 +272,24 @@ namespace Sidwatch.Library.Managers
         {
             SystemCredentialsDAO dao = new SystemCredentialsDAO(MongoDB);
             dao.Persist(_systemCredentials);
+        }
+
+        public SystemCredentials GetLatestActive()
+        {
+            SystemCredentialsDAO dao = new SystemCredentialsDAO(MongoDB);
+            return dao.GetLatestActive();
+        }
+
+        public List<SystemCredentials> GetSystemCredentials()
+        {
+            SystemCredentialsDAO dao = new SystemCredentialsDAO(MongoDB);
+            return dao.GetAll();
+        }
+
+        public List<SystemCredentials> GetActiveSystemCredentials()
+        {
+            SystemCredentialsDAO dao = new SystemCredentialsDAO(MongoDB);
+            return dao.GetActive();
         }
 
         #endregion
