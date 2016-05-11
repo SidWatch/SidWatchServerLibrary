@@ -154,7 +154,7 @@ namespace swTestLibrary.Tests
         [Test]
         public void AddToSiteDay2()
         {
-            DateTime now = DateTime.Now.AddYears(-10).AddDays(-10).Date;
+            DateTime now = DateTime.Now.AddYears(-6).AddDays(-10).Date;
 
             m_Manager.AddFileToSiteDay(m_SiteGuid, now);
             m_Manager.AddFileToSiteDay(m_SiteGuid, now);
@@ -200,6 +200,141 @@ namespace swTestLibrary.Tests
             Assert.IsTrue(foundMinus2);
             Assert.IsTrue(foundMinus1);
             Assert.IsTrue(foundToday);
+        }
+
+        [Test]
+        public void GetSiteDaysRange()
+        {
+            DateTime now = DateTime.Now.AddYears(-3).Date;
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-10), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-9), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-8), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-7), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-6), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-5), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-4), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-3), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-2), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-1), 6);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now, 7);
+
+            List<SiteDay> siteDays = m_Manager.GetSiteDays(m_SiteGuid, now.AddDays(-5), now);
+
+            bool foundMinus6 = false;
+            bool foundMinus5 = false;
+            bool foundMinus1 = false;
+            bool foundToday = false;
+
+            foreach (var siteDay in siteDays)
+            {
+                if (siteDay.Date == now.AddDays(-6))
+                {
+                    foundMinus6 = true;
+                }
+
+                if (siteDay.Date == now.AddDays(-5))
+                {
+                    foundMinus5 = true;
+                }
+
+                if (siteDay.Date == now.AddDays(-1))
+                {
+                    foundMinus1 = true;
+                }
+
+                if (siteDay.Date == now)
+                {
+                    foundToday = true;
+                }
+            }
+
+            Assert.IsFalse(foundMinus6);
+            Assert.IsTrue(foundMinus5);
+            Assert.IsTrue(foundMinus1);
+            Assert.IsTrue(foundToday);
+        }
+
+        [Test]
+        public void GetSiteDaysMinUp()
+        {
+            DateTime now = DateTime.Now.AddYears(-3).Date;
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-10), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-9), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-8), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-7), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-6), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-5), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-4), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-3), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-2), 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-1), 6);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, now, 7);
+
+            List<SiteDay> siteDays = m_Manager.GetSiteDays(m_SiteGuid, now.AddDays(-5));
+
+            bool foundMinus6 = false;
+            bool foundMinus5 = false;
+            bool foundMinus1 = false;
+            bool foundToday = false;
+
+            foreach (var siteDay in siteDays)
+            {
+                if (siteDay.Date == now.AddDays(-6))
+                {
+                    foundMinus6 = true;
+                }
+
+                if (siteDay.Date == now.AddDays(-5))
+                {
+                    foundMinus5 = true;
+                }
+
+                if (siteDay.Date == now.AddDays(-1))
+                {
+                    foundMinus1 = true;
+                }
+
+                if (siteDay.Date == now)
+                {
+                    foundToday = true;
+                }
+            }
+
+            Assert.IsFalse(foundMinus6);
+            Assert.IsTrue(foundMinus5);
+            Assert.IsTrue(foundMinus1);
+            Assert.IsTrue(foundToday);
+        }
+
+        [Test]
+        public void GetMinMax()
+        {
+            DateTime min = DateTime.Now.AddYears(-7).Date;
+            DateTime max = DateTime.Now.AddYears(+7).Date;
+
+            m_Manager.SetSiteDayFiles(m_SiteGuid, min, 5);
+            m_Manager.SetSiteDayFiles(m_SiteGuid, max, 6);
+
+            DateTime? dateMin = m_Manager.GetMinDay(m_SiteGuid);
+            DateTime? dateMax = m_Manager.GetMaxDay(m_SiteGuid);
+
+            Assert.IsNotNull(dateMin);
+            Assert.IsNotNull(dateMax);
+
+            Assert.AreEqual(min, dateMin);
+            Assert.AreEqual(max, dateMax);
+        }
+
+        [Test]
+        public void GetMinMaxNull()
+        {
+            Guid siteGuid = Guid.NewGuid();
+
+            DateTime? dateMin = m_Manager.GetMinDay(siteGuid);
+            DateTime? dateMax = m_Manager.GetMaxDay(siteGuid);
+
+            Assert.IsNull(dateMin);
+            Assert.IsNull(dateMax);
         }
     }
 }

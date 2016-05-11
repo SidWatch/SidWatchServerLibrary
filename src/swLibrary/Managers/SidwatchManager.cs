@@ -144,6 +144,18 @@ namespace Sidwatch.Library.Managers
             return dao.GetSiteDays(_siteGuid);
         }
 
+        public List<SiteDay> GetSiteDays(Guid _siteGuid, DateTime _startDate)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            return dao.GetSiteDays(_siteGuid, _startDate.Date);
+        }
+        
+        public List<SiteDay> GetSiteDays(Guid _siteGuid, DateTime _startDate, DateTime _endDate)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            return dao.GetSiteDays(_siteGuid, _startDate.Date, _endDate.Date);
+        }
+
         public void Persist(SiteDay _siteDay)
         {
             SiteDayDAO dao = new SiteDayDAO(MongoDB);
@@ -189,6 +201,32 @@ namespace Sidwatch.Library.Managers
 
             sd.DataFileCount = _count;
             dao.Persist(sd);
+        }
+
+        public DateTime? GetMinDay(Guid _siteGuid)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            SiteDay minDay = dao.GetMinSiteDay(_siteGuid);
+
+            if (minDay == null)
+            {
+                return null;
+            }
+
+            return minDay.Date;
+        }
+
+        public DateTime? GetMaxDay(Guid _siteGuid)
+        {
+            SiteDayDAO dao = new SiteDayDAO(MongoDB);
+            SiteDay minDay = dao.GetMaxSiteDay(_siteGuid);
+
+            if (minDay == null)
+            {
+                return null;
+            }
+
+            return minDay.Date;
         }
 
         #endregion

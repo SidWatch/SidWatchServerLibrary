@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using Sidwatch.Library.Objects;
@@ -46,5 +47,49 @@ namespace Sidwatch.Library.DAOs
         {
             return GetSorted("ParentGuid", _siteGuid.ToString(), "Date");
         }
+
+        public List<SiteDay> GetSiteDays(Guid _siteGuid, DateTime _startDate)
+        {
+            IMongoQuery query = Query.And(
+                Query.EQ("ParentGuid", new BsonString(_siteGuid.ToString())),
+                Query.GTE("Date", new BsonString(_startDate.ToString("u"))));
+
+            MongoCursor cursor = GetCursor(query);
+            cursor.SetSortOrder(SortBy.Ascending("Date"));
+
+            return GetList(cursor);
+        }
+
+        public List<SiteDay> GetSiteDays(Guid _siteGuid, DateTime _startDate, DateTime _endDate)
+        {
+            IMongoQuery query = Query.And(
+                Query.EQ("ParentGuid", new BsonString(_siteGuid.ToString())),
+                Query.GTE("Date", new BsonString(_startDate.ToString("u"))),
+                Query.LTE("Date", new BsonString(_endDate.ToString("u"))));
+
+            MongoCursor cursor = GetCursor(query);
+            cursor.SetSortOrder(SortBy.Ascending("Date"));
+
+            return GetList(cursor);
+        }
+
+        public SiteDay GetMaxSiteDay(Guid _siteGuid)
+        {
+            IMongoQuery query = GetQuery("ParentGuid", _siteGuid.ToString());
+            MongoCursor cursor = GetCursor(query);
+            cursor.SetSortOrder(SortBy.Descending("Date"));
+
+            return GetFirst(cursor);
+        }
+
+        public SiteDay GetMinSiteDay(Guid _siteGuid)
+        {
+            IMongoQuery query = GetQuery("ParentGuid", _siteGuid.ToString());
+            MongoCursor cursor = GetCursor(query);
+            cursor.SetSortOrder(SortBy.Ascending("Date"));
+
+            return GetFirst(cursor);
+        }
+
     }
 }
