@@ -38,7 +38,7 @@ namespace swTestLibrary.Tests
             {
                 Active = true,
                 DataFileCount = 100,
-                Date = DateTime.Now.Date,
+                Date = DateTime.UtcNow.Date,
                 Guid = Guid.NewGuid(),
                 ParentGuid = m_SiteGuid
             };
@@ -62,7 +62,7 @@ namespace swTestLibrary.Tests
             {
                 Active = true,
                 DataFileCount = 18,
-                Date = DateTime.Now.Date.AddYears(-5),
+                Date = DateTime.UtcNow.Date.AddYears(-5),
                 Guid = Guid.NewGuid(),
                 ParentGuid = m_SiteGuid
             };
@@ -77,7 +77,7 @@ namespace swTestLibrary.Tests
             {
                 Active = true,
                 DataFileCount = 18,
-                Date = DateTime.Now.Date.AddYears(-4),
+                Date = DateTime.UtcNow.Date.AddYears(-4),
                 Guid = Guid.NewGuid(),
                 ParentGuid = m_SiteGuid
             };
@@ -101,7 +101,7 @@ namespace swTestLibrary.Tests
             {
                 Active = true,
                 DataFileCount = 18,
-                Date = DateTime.Now.Date.AddYears(-3),
+                Date = DateTime.UtcNow.Date.AddYears(-3),
                 Guid = Guid.NewGuid(),
                 ParentGuid = m_SiteGuid
             };
@@ -126,7 +126,7 @@ namespace swTestLibrary.Tests
         [Test]
         public void SetSiteDay()
         {
-            DateTime now = DateTime.Now.AddYears(-2).Date;
+            DateTime now = DateTime.UtcNow.AddYears(-2).Date;
             m_Manager.SetSiteDayFiles(m_SiteGuid, now, 5);
 
             m_Manager.SetSiteDayFiles(m_SiteGuid, now, 4);
@@ -140,7 +140,7 @@ namespace swTestLibrary.Tests
         [Test]
         public void AddToSiteDay()
         {
-            DateTime now = DateTime.Now.AddYears(-1).Date;
+            DateTime now = DateTime.UtcNow.AddYears(-1).Date;
             m_Manager.SetSiteDayFiles(m_SiteGuid, now, 5);
 
             m_Manager.AddFileToSiteDay(m_SiteGuid, now);
@@ -154,7 +154,7 @@ namespace swTestLibrary.Tests
         [Test]
         public void AddToSiteDay2()
         {
-            DateTime now = DateTime.Now.AddYears(-6).AddDays(-10).Date;
+            DateTime now = DateTime.UtcNow.AddYears(-6).AddDays(-10).Date;
 
             m_Manager.AddFileToSiteDay(m_SiteGuid, now);
             m_Manager.AddFileToSiteDay(m_SiteGuid, now);
@@ -168,7 +168,7 @@ namespace swTestLibrary.Tests
         [Test]
         public void GetSiteDays()
         {
-            DateTime now = DateTime.Now.AddYears(-1).Date;
+            DateTime now = DateTime.UtcNow.AddYears(-1).Date;
             m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-2), 5);
             m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-1), 6);
             m_Manager.SetSiteDayFiles(m_SiteGuid, now, 7);
@@ -205,7 +205,7 @@ namespace swTestLibrary.Tests
         [Test]
         public void GetSiteDaysRange()
         {
-            DateTime now = DateTime.Now.AddYears(-3).Date;
+            DateTime now = DateTime.UtcNow.AddYears(-3).Date;
             m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-10), 5);
             m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-9), 5);
             m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-8), 5);
@@ -257,7 +257,7 @@ namespace swTestLibrary.Tests
         [Test]
         public void GetSiteDaysMinUp()
         {
-            DateTime now = DateTime.Now.AddYears(-3).Date;
+            DateTime now = DateTime.UtcNow.AddYears(-4).Date;
             m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-10), 5);
             m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-9), 5);
             m_Manager.SetSiteDayFiles(m_SiteGuid, now.AddDays(-8), 5);
@@ -309,8 +309,8 @@ namespace swTestLibrary.Tests
         [Test]
         public void GetMinMax()
         {
-            DateTime min = DateTime.Now.AddYears(-7).Date;
-            DateTime max = DateTime.Now.AddYears(+7).Date;
+            DateTime min = DateTime.UtcNow.AddYears(-7).Date;
+            DateTime max = DateTime.UtcNow.AddYears(+7).Date;
 
             m_Manager.SetSiteDayFiles(m_SiteGuid, min, 5);
             m_Manager.SetSiteDayFiles(m_SiteGuid, max, 6);

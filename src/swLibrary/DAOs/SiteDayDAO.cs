@@ -52,7 +52,7 @@ namespace Sidwatch.Library.DAOs
         {
             IMongoQuery query = Query.And(
                 Query.EQ("ParentGuid", new BsonString(_siteGuid.ToString())),
-                Query.GTE("Date", new BsonString(_startDate.ToString("u"))));
+                Query.GTE("Date", new BsonString(DateHelper.ToString(_startDate))));
 
             MongoCursor cursor = GetCursor(query);
             cursor.SetSortOrder(SortBy.Ascending("Date"));
@@ -62,10 +62,11 @@ namespace Sidwatch.Library.DAOs
 
         public List<SiteDay> GetSiteDays(Guid _siteGuid, DateTime _startDate, DateTime _endDate)
         {
+            
             IMongoQuery query = Query.And(
                 Query.EQ("ParentGuid", new BsonString(_siteGuid.ToString())),
-                Query.GTE("Date", new BsonString(_startDate.ToString("u"))),
-                Query.LTE("Date", new BsonString(_endDate.ToString("u"))));
+                Query.GTE("Date", new BsonString(DateHelper.ToString(_startDate))),
+                Query.LTE("Date", new BsonString(DateHelper.ToString(_endDate))));
 
             MongoCursor cursor = GetCursor(query);
             cursor.SetSortOrder(SortBy.Ascending("Date"));
@@ -79,7 +80,7 @@ namespace Sidwatch.Library.DAOs
             MongoCursor cursor = GetCursor(query);
             cursor.SetSortOrder(SortBy.Descending("Date"));
 
-            return GetFirst(cursor);
+            return GetOneItem<SiteDay>(cursor);
         }
 
         public SiteDay GetMinSiteDay(Guid _siteGuid)
@@ -88,7 +89,7 @@ namespace Sidwatch.Library.DAOs
             MongoCursor cursor = GetCursor(query);
             cursor.SetSortOrder(SortBy.Ascending("Date"));
 
-            return GetFirst(cursor);
+            return GetOneItem<SiteDay>(cursor);
         }
 
     }

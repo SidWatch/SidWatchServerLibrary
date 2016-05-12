@@ -5,8 +5,14 @@ namespace Sidwatch.Library.Objects
 {
     public class SiteDay : AbstractTGObject
     {
+        private DateTime m_Date;
         //Parent - Site
-        public DateTime Date { get; set; }
+        public DateTime Date
+        {
+            get { return m_Date; }
+            set { m_Date = value.ToUniversalTime().Date; }
+        }
+
         public int DataFileCount { get; set; }
 
         public override TGSerializedObject GetTGSerializedObject()

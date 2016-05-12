@@ -165,7 +165,7 @@ namespace Sidwatch.Library.Managers
         public void AddFileToSiteDay(Guid _siteGuid, DateTime _date)
         {
             SiteDayDAO dao = new SiteDayDAO(MongoDB);
-            SiteDay sd = dao.Get(_siteGuid, _date);
+            SiteDay sd = dao.Get(_siteGuid, _date.Date);
 
             if (sd == null)
             {
@@ -173,7 +173,7 @@ namespace Sidwatch.Library.Managers
                 {
                     Active = true,
                     DataFileCount = 0,
-                    Date = _date,
+                    Date = _date.Date,
                     Guid = Guid.NewGuid(),
                     ParentGuid = _siteGuid
                 };
