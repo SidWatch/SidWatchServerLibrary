@@ -97,28 +97,28 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="tgAWS, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\TreeGeckoLibraries.AWS.1.0.71\lib\net40\tgAWS.dll</HintPath>
+    <Reference Include="tgAWS, Version=1.0.72.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.AWS.1.0.72\lib\net40\tgAWS.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="tgCommonLibrary, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\TreeGeckoLibraries.Common.1.0.71\lib\net40\tgCommonLibrary.dll</HintPath>
+    <Reference Include="tgCommonLibrary, Version=1.0.72.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Common.1.0.72\lib\net40\tgCommonLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="tgGeoframeworks, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\TreeGeckoLibraries.Geospatial.1.0.71\lib\net40\tgGeoframeworks.dll</HintPath>
+    <Reference Include="tgGeoframeworks, Version=1.0.72.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Geospatial.1.0.72\lib\net40\tgGeoframeworks.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="tgLoggly, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\TreeGeckoLibraries.Loggly.1.0.71\lib\net45\tgLoggly.dll</HintPath>
+    <Reference Include="tgLoggly, Version=1.0.72.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Loggly.1.0.72\lib\net45\tgLoggly.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="tgMongo, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\TreeGeckoLibraries.Mongo.1.0.71\lib\net40\tgMongo.dll</HintPath>
+    <Reference Include="tgMongo, Version=1.0.72.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Mongo.1.0.72\lib\net40\tgMongo.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="tgNet, Version=1.0.71.0, Culture=neutral, processorArchitecture=AMD64">
-      <HintPath>..\packages\TreeGeckoLibraries.Net.1.0.71\lib\net40\tgNet.dll</HintPath>
+    <Reference Include="tgNet, Version=1.0.72.0, Culture=neutral, processorArchitecture=AMD64">
+      <HintPath>..\packages\TreeGeckoLibraries.Net.1.0.72\lib\net40\tgNet.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>

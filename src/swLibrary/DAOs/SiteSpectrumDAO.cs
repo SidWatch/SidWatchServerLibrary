@@ -1,4 +1,8 @@
-﻿using MongoDB.Driver;
+﻿using System;
+using System.Collections.Generic;
+using MongoDB.Bson;
+using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using Sidwatch.Library.Objects;
 using TreeGecko.Library.Mongo.DAOs;
 
@@ -18,9 +22,34 @@ namespace Sidwatch.Library.DAOs
             get { return "SiteSpectrums"; }
         }
 
-        public SiteSpectrum GetLatest()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_siteGuid"></param>
+        /// <returns></returns>
+        public SiteSpectrum GetLatest(Guid _siteGuid)
+        {            
+            return GetOneItem<SiteSpectrum>("ParentGuid", _siteGuid.ToString(), "ReadingDateTime");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="_siteGuid"></param>
+        /// <param name="_startDateTime"></param>
+        /// <param name="_endDateTime"></param>
+        /// <returns></returns>
+        public List<SiteSpectrum> GetSiteSpectrums(
+            Guid _siteGuid,
+            DateTime _startDateTime,
+            DateTime _endDateTime)
         {
-            return GetOneItem<SiteSpectrum>("ReadingDateTime");
+            IMongoQuery query = Query.And(
+                Query.EQ("ParentGuid", new BsonString(_siteGuid.ToString())),
+                Query.GTE("ReadingDateTime", new BsonString(_startDateTime.ToString("u"))),
+                Query.LTE("ReadingDateTime", new BsonString(_endDateTime.ToString("u"))));
+
+            return GetList(query);
         }
     }
 }

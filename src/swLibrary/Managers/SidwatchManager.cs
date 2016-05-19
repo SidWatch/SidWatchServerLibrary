@@ -243,7 +243,13 @@ namespace Sidwatch.Library.Managers
         public SiteSpectrum GetLatestSiteSpectrum(Guid _siteGuid)
         {
             SiteSpectrumDAO dao = new SiteSpectrumDAO(MongoDB);
-            return dao.GetLatest();
+            return dao.GetLatest(_siteGuid);
+        }
+
+        public List<SiteSpectrum> GetSiteSpectrums(Guid _siteGuid, DateTime _startDateTime, DateTime _endDateTime)
+        {
+            SiteSpectrumDAO dao = new SiteSpectrumDAO(MongoDB);
+            return dao.GetSiteSpectrums(_siteGuid, _startDateTime, _endDateTime);
         }
 
         public void Persist(SiteSpectrum _siteSpectrum)
