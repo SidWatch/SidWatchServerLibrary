@@ -9,7 +9,8 @@ namespace Sidwatch.Library.Managers
 {
     public class SidWatchManager : AbstractCoreManager
     {
-        public SidWatchManager() : base("SW")
+        public SidWatchManager() 
+            : base("SW")
         {
         }
 
@@ -237,6 +238,13 @@ namespace Sidwatch.Library.Managers
         {
             SiteSpectrumDAO dao = new SiteSpectrumDAO(MongoDB);
             return dao.Get(_siteSpectrumGuid);
+        }
+
+        public SiteSpectrum GetLatestSiteSpectrum(Guid _siteGuid)
+        {
+            SiteSpectrumDAO dao = new SiteSpectrumDAO(MongoDB);
+
+
         }
 
         public void Persist(SiteSpectrum _siteSpectrum)

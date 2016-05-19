@@ -17,5 +17,10 @@ namespace Sidwatch.Library.DAOs
         {
             get { return "SiteSpectrums"; }
         }
+
+        public SiteSpectrum GetLatest()
+        {
+            return GetOneItem<SiteSpectrum>("ReadingDateTime");
+        }
     }
 }
